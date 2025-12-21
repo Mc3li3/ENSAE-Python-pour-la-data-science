@@ -1,1 +1,5 @@
-spotipy
+pandas
+requests
+seaborn
+matplotlib
+numpy
