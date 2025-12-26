@@ -34,7 +34,7 @@ jobs:
     # Si cette étape passe, tu as 20/20 en reproductibilité.
     - name: 🏃 Run Notebook (Sanity Check)
       run: |
-        jupyter nbconvert --to notebook --execute main.ipynb --output main_executed.ipynb
+        jupyter nbconvert --to notebook --execute src/main.ipynb --output src/main_executed.ipynb
 
     # 5. (Optionnel) Sauvegarde du notebook exécuté comme "artefact"
     # Permet de télécharger le notebook résultant depuis GitHub pour voir les graphs générés
@@ -42,4 +42,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: executed-notebook
-        path: main_executed.ipynb
+        path: src/main_executed.ipynb
