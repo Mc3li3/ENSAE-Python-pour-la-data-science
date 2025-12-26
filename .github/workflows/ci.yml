@@ -42,4 +42,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: executed-notebook
-        path: src/main_executed.ipynb
+        path: main_executed.ipynb
