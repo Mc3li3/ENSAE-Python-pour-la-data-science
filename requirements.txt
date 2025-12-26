@@ -3,3 +3,4 @@ requests
 seaborn
 matplotlib
 numpy
+scikit-learn
