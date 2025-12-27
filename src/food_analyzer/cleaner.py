@@ -16,6 +16,7 @@ def clean_data(products_list):
             'Nom': item.get('product_name', 'Inconnu'),
             'Marque': item.get('brands', 'Inconnu'),
             'Nutriscore': str(item.get('nutriscore_grade', 'nan')).upper(),
+            'Category_Label': item.get('Category_Label', 'Autre'),
             'Energie': n.get('energy-kcal_100g', np.nan),
             'Sucre': n.get('sugars_100g', np.nan),
             'Gras': n.get('fat_100g', np.nan),
