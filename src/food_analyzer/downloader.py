@@ -1,63 +1,56 @@
 import requests
 import time
-import random
 
 
-def get_mock_data(count=50):
-    """Génère des fausses données crédibles si l'API est en panne."""
-    print("⚠️ API INDISPONIBLE : Utilisation de données de secours (Mock Data).")
-    mock_products = []
-    for i in range(count):
-        # Simulation d'un profil nutritionnel de biscuit
-        score = random.choice(['A', 'B', 'C', 'D', 'E'])
-        sucre = random.uniform(0, 10) if score in ['A', 'B'] else random.uniform(20, 50)
-        gras = random.uniform(0, 10) if score in ['A', 'B'] else random.uniform(15, 30)
-        mock_products.append({
-            'product_name': f'Produit Test {i}',
-            'brands': 'Marque Test',
-            'nutriscore_grade': score,
-            'nutriments': {
-                'energy-kcal_100g': random.uniform(300, 550),
-                'sugars_100g': sucre,
-                'fat_100g': gras,
-                'saturated-fat_100g': gras / 2,
-                'salt_100g': random.uniform(0.1, 1.5),
-                'fiber_100g': random.uniform(0, 5),
-                'proteins_100g': random.uniform(2, 8)
-            }
-        })
-    return mock_products
-
-
-def fetch_products(category, page_size=100):
+def fetch_products(category, target_count=500):
     """
-    Récupère les données avec 3 tentatives (Retries) et un fallback.
+    Récupère 'target_count' produits en demandant page par page
+    pour ne pas surcharger l'API (Pagination).
     """
     url = "https://world.openfoodfacts.org/cgi/search.pl"
-    params = {
-        "action": "process",
-        "tagtype_0": "categories",
-        "tag_contains_0": "contains",
-        "tag_0": category,
-        "page_size": page_size,
-        "json": 1,
-        "fields": "product_name,nutriscore_grade,nutriments,brands"
-    }
+    all_products = []
+    page = 1
+    page_size = 50  # On demande par petits paquets pour être sûr d'avoir une réponse
 
-    # On essaie 3 fois avant d'abandonner
-    for attempt in range(3):
+    print(f"📡 Démarrage de la collecte pour atteindre {target_count} produits...")
+
+    while len(all_products) < target_count:
+        params = {
+            "action": "process",
+            "tagtype_0": "categories",
+            "tag_contains_0": "contains",
+            "tag_0": category,
+            "page_size": page_size,
+            "page": page,  # C'est ici qu'on tourne les pages
+            "json": 1,
+            # On demande uniquement les champs utiles
+            "fields": "product_name,brands,nutriscore_grade,nutriments,nova_group"
+        }
+
         try:
-            print(f"📡 Tentative {attempt+1}/3 pour : {category}...")
-            response = requests.get(url, params=params, timeout=100)
-            if response.status_code == 200:
-                data = response.json().get('products', [])
-                if data: return data # Succès !
-            # Si le serveur nous dit d'attendre (429) ou erreur serveur (500+)
-            time.sleep(2) # On attend 2 secondes avant de recommencer
-        except requests.exceptions.RequestException as e:
-            print(f"❌ Erreur connexion ({e})...")
-            time.sleep(2)
+            print(f"   ... Récupération page {page} ({len(all_products)}/{target_count})")
+            response = requests.get(url, params=params, timeout=10)
 
-    # Si on arrive ici, c'est que les 3 essais ont échoué.
-    # On renvoie les données de secours pour SAUVER LA DÉMO.
-    return get_mock_data(page_size)
+            if response.status_code != 200:
+                print("   ⚠️ Erreur serveur temporaire, on réessaie...")
+                time.sleep(2)
+                continue
+
+            data = response.json().get('products', [])
+
+            if not data:
+                print("   🏁 Plus de produits disponibles dans cette catégorie.")
+                break
+
+            all_products.extend(data)
+            page += 1
+            time.sleep(0.5)  # Politesse : On laisse le serveur respirer
+
+        except Exception as e:
+            print(f"   ❌ Erreur réseau : {e}")
+            break
+
+    print(f"✅ Collecte terminée : {len(all_products)} produits récupérés.")
+
+    # On coupe si on en a trop récupéré
+    return all_products[:target_count]
