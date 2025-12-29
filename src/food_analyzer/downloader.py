@@ -82,7 +82,7 @@ def downloader(saved_dataset):
 
     csv_path = os.path.abspath(csv_path)
 
-    if IS_CI or saved_dataset:
+    if True or saved_dataset:
         print("🤖 Utilisation du dataset ")
         df_final = pd.read_csv(csv_path)
         if IS_CI:
