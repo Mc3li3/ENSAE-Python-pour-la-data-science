@@ -62,6 +62,14 @@ Toute la logique (Récupération API → Nettoyage → Visualisation → Machine
 3.  **Exécutez la première cellule** : elle contient les commandes magiques (`%pip install ...`) pour installer automatiquement toutes les dépendances nécessaires (`pandas`, `scikit-learn`, `plotly`, etc.).
 4.  Exécutez les cellules suivantes séquentiellement pour dérouler l'analyse.
 
+
+### ⚙️ Méthodologie : Collaboration et Reproductibilité (CI/CD)
+
+Pour garantir la robustesse technique de notre projet, nous avons adopté un flux de travail inspiré des standards de l'industrie. Le développement s'est articulé autour de **Pull Requests**, imposant une relecture (parfois croisée) du code avant fusion dans la branche principale.
+
+En parallèle, nous avons mis en place un pipeline d'intégration continue (CI) via **GitHub Actions**. Ce système automatise l'installation des dépendances et l'exécution du notebook à chaque modification, nous assurant que l'environnement est stable et que nos résultats sont parfaitement **reproductibles**, indépendamment de nos machines locales.
+
+
 ## 🛠️ Stack Technique
 
 Ce projet met en œuvre un pipeline de Data Science complet :
@@ -75,7 +83,7 @@ Ce projet met en œuvre un pipeline de Data Science complet :
 * **Plotly :** Graphiques interactifs pour l'exploration multidimensionnelle.
 * **Matplotlib / Seaborn :** Visualisation des matrices de confusion et courbes d'importance.
 
-### 🤖 Machine Learning & IA
+### 🤖 Machine Learning
 * **Algorithmes :** Random Forest Classifier (pour gérer les effets de seuil et la non-linéarité).
 * **Validation :** Stratified K-Fold Cross-Validation (pour assurer la robustesse statistique).
 * **Optimisation :** GridSearchCV (Tuning des hyperparamètres).
