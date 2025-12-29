@@ -35,7 +35,7 @@ def fetch_products(category, target_count=500):
 
             if response.status_code != 200:
                 print("   ⚠️ Erreur serveur temporaire, on réessaie...")
-                time.sleep(2)
+                time.sleep(1)
                 continue
 
             data = response.json().get('products', [])
@@ -46,7 +46,7 @@ def fetch_products(category, target_count=500):
 
             all_products.extend(data)
             page += 1
-            time.sleep(0.5)  # Politesse : On laisse le serveur respirer
+            time.sleep(0.05)  # Politesse : On laisse le serveur respirer
 
         except Exception as e:
             print(f"   ❌ Erreur réseau : {e}")
@@ -78,7 +78,7 @@ def downloader(saved_dataset):
 
     if IS_CI or saved_dataset:
         print("🤖 Utilisation du dataset ")
-        df_final = pd.read_csv('../../data/food.csv')
+        df_final = pd.read_csv('../data/food.csv')
         if IS_CI:
             df_final = df_final.sample(n=100, random_state=42)
     else:
@@ -112,7 +112,7 @@ def downloader(saved_dataset):
 
         # Nettoyage global
         df_final = clean_data(all_data)
-        df_final.to_csv('../../data/food.csv', index=False)
+        df_final.to_csv('../data/food.csv', index=False)
 
     print("-" * 50)
     print(f"🚀 DATASET FINAL : {len(df_final)} produits.")
