@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 
@@ -46,7 +47,7 @@ def remove_aberrant_values(df):
 
 def clean_data(products_list):
     """
-    Nettoie les données et prépare les colonnes pour l'analyse.
+    Nettoie les données et supprime les lignes incomplètes (NaN).
     """
     if not products_list:
         return pd.DataFrame()
@@ -59,21 +60,26 @@ def clean_data(products_list):
             'Marque': item.get('brands', 'Inconnu'),
             'Nutriscore': str(item.get('nutriscore_grade', 'nan')).upper(),
             'Category_Label': item.get('Category_Label', 'Autre'),
-            'Energie': n.get('energy-kcal_100g', 0),
-            'Sucre': n.get('sugars_100g', 0),
-            'Gras': n.get('fat_100g', 0),
-            'Saturés': n.get('saturated-fat_100g', 0),
-            'Sel': n.get('salt_100g', 0),
-            'Fibres': n.get('fiber_100g', 0),
-            'Protéines': n.get('proteins_100g', 0),
-            'Fruits et Légumes': n.get('fruits-vegetables-nuts-estimate-from-ingredients_100g', 0)
+            'Energie': n.get('energy-kcal_100g', np.nan),
+            'Sucre': n.get('sugars_100g', np.nan),
+            'Gras': n.get('fat_100g', np.nan),
+            'Saturés': n.get('saturated-fat_100g', np.nan),
+            'Sel': n.get('salt_100g', np.nan),
+            'Fibres': n.get('fiber_100g', np.nan),
+            'Protéines': n.get('proteins_100g', np.nan),
+            'Fruits et Légumes': n.get('fruits-vegetables-nuts-estimate-from-ingredients_100g', 0) 
+            # Pour les fruits, on peut laisser 0 car c'est souvent non déclaré quand il n'y en a pas.
         })
 
     df = pd.DataFrame(data)
 
-    # Filtres stricts pour le ML
+    # Maintenant, dropna va supprimer les lignes qui ont des np.nan
     cols_to_check = ['Nutriscore', 'Energie', 'Sucre', 'Saturés', 'Sel', 'Protéines']
+    
+    initial_len = len(df)
     df = df.dropna(subset=cols_to_check)
+    print(f"📉 Suppression des manquants : {initial_len - len(df)} produits écartés.")
+
     df = df[df['Nutriscore'].isin(['A', 'B', 'C', 'D', 'E'])]
     df = df.sort_values('Nutriscore')
 

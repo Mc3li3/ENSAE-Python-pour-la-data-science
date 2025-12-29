@@ -91,7 +91,7 @@ def downloader(saved_dataset):
             df_final = df_final.sample(n=100, random_state=42)
     else:
         print("💻 Mode Local : Chargement complet du Dataset.")
-        TARGET_PER_CAT = 300
+        TARGET_PER_CAT = 500
 
         for label, api_tag in categories_map.items():
             print(f"\n📦 [{label}] Récupération en cours...")
