@@ -76,9 +76,15 @@ def downloader(saved_dataset):
     # GitHub Actions définit automatiquement la variable d'environnement 'CI'
     IS_CI = os.environ.get('CI') == 'true'
 
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+
+    csv_path = os.path.join(base_dir, '..', '..', 'data', 'food.csv')
+
+    csv_path = os.path.abspath(csv_path)
+
     if IS_CI or saved_dataset:
         print("🤖 Utilisation du dataset ")
-        df_final = pd.read_csv('../data/food.csv')
+        df_final = pd.read_csv('csv_path')
         if IS_CI:
             df_final = df_final.sample(n=100, random_state=42)
     else:
