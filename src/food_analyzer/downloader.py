@@ -86,7 +86,7 @@ def downloader(saved_dataset):
         print("🤖 Utilisation du dataset ")
         df_final = pd.read_csv(csv_path)
         if IS_CI:
-            df_final = df_final.sample(n=100, random_state=42)
+            df_final = df_final.sample(n=500, random_state=42)
     else:
         print("💻 Mode Local : Chargement complet du Dataset.")
         TARGET_PER_CAT = 300
@@ -118,7 +118,7 @@ def downloader(saved_dataset):
 
         # Nettoyage global
         df_final = clean_data(all_data)
-        df_final.to_csv('../data/food.csv', index=False)
+        df_final.to_csv(csv_path, index=False)
 
     print("-" * 50)
     print(f"🚀 DATASET FINAL : {len(df_final)} produits.")
