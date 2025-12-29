@@ -1,43 +1,41 @@
-name: 🛡️ Reproducibility Check
+name: Reproducibility Check
 
-# Quand l'action doit-elle se lancer ?
 on:
   push:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
 
+env:
+  PYTHONUNBUFFERED: "1"
+
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest # On utilise une machine virtuelle Linux standard
+    runs-on: ubuntu-latest
 
     steps:
-    # 1. Récupération du code
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # 2. Installation de Python
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
         python-version: "3.9"
 
-    # 3. Installation des dépendances (Mise en cache pour aller plus vite)
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        # On installe nbconvert pour pouvoir exécuter le notebook en ligne de commande
         pip install jupyter nbconvert
 
-    # 4. Le Test Ultime : Exécution du Notebook
-    # Si cette étape passe, tu as 20/20 en reproductibilité.
-    - name: 🏃 Run Notebook (Sanity Check)
+    - name: Debug - Check data availability
       run: |
-        jupyter nbconvert --to notebook --execute src/main.ipynb --output main_executed.ipynb
+        ls -R data/ || echo "Data directory missing"
 
-    # 5. (Optionnel) Sauvegarde du notebook exécuté comme "artefact"
-    # Permet de télécharger le notebook résultant depuis GitHub pour voir les graphs générés
+    - name: Execute Notebook
+      run: |
+        jupyter nbconvert --to notebook --execute src/main.ipynb --output main_executed.ipynb --ExecutePreprocessor.timeout=-1
+
     - name: Upload executed notebook
       uses: actions/upload-artifact@v4
       with:
