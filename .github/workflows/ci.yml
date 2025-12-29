@@ -25,18 +25,16 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        pip install jupyter nbconvert
+        pip install pandas numpy requests matplotlib seaborn plotly scikit-learn jupyter nbconvert ipykernel
 
     - name: Debug - Check data availability
       run: |
-        echo "📍 Je suis dans : $(pwd)"
-        echo "📂 Contenu de src/food_analyzer :"
-        ls -l src/food_analyzer/
-        echo "📂 Vérification du CSV :"
-        ls -l data/food.csv || echo "❌ LE FICHIER CSV N'EST PAS LÀ !"
+        echo "Current directory: $(pwd)"
+        ls -l data/food.csv || echo "CSV file not found"
 
     - name: Execute Notebook
+      env:
+        PYTHONPATH: ${{ github.workspace }}/src
       run: |
         jupyter nbconvert --to notebook --execute src/main.ipynb --output src/main_executed.ipynb --ExecutePreprocessor.timeout=-1
 
