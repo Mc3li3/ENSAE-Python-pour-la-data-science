@@ -68,7 +68,7 @@ def corr_matrix(df_final):
         corr_matrix,
         text_auto=True,              # Affiche les chiffres dans les cases
         aspect="auto",
-        color_continuous_scale="RdBu_r", # Rouge = Corrélation Positive, Bleu = Négative
+        color_continuous_scale="RdBu_r",  # Rouge = Corrélation Positive, Bleu = Négative
         zmin=-1, zmax=1,
         title="Matrice de Corrélation des Nutriments"
     )
@@ -77,7 +77,7 @@ def corr_matrix(df_final):
 
 def distribution_nutriscore_par_famille_d_aliments(df_final):
     fig = px.histogram(
-        df_final, 
+        df_final,
         y="Category_Label",          # Catégories sur l'axe vertical
         color="Nutriscore",          # Couleurs selon la note
         color_discrete_map=color_map,
@@ -108,16 +108,16 @@ def nutriscore_par_marques(df_final):
 
     # Graphique Barrres Empilées 100%
     fig = px.histogram(
-        df_marques, 
-        x="Marque", 
-        color="Nutriscore", 
-        pattern_shape="Nutriscore", # Ajoute des motifs pour l'accessibilité
+        df_marques,
+        x="Marque",
+        color="Nutriscore",
+        pattern_shape="Nutriscore",  # Ajoute des motifs pour l'accessibilité
         barnorm="percent",          # Normalise à 100% pour comparer équitablement
         color_discrete_map=color_map,
         category_orders=order_config,
         title="Podium des Marques : Répartition des Scores (en %)",
         text_auto='.0f'             # Affiche le pourcentage
-    ).update_xaxes(categoryorder="total ascending") # Trie par volume
+    ).update_xaxes(categoryorder="total ascending")  # Trie par volume
 
     return fig
 
@@ -141,7 +141,7 @@ def sucre_gras(df_final):
         # --- CRÉATION DE LA STRUCTURE (2 Graphiques côte à côte) ---
         fig = make_subplots(
             rows=1, cols=2,
-            column_widths=[0.4, 0.6], # Le scatter plot à droite est un peu plus large
+            column_widths=[0.4, 0.6],  # Le scatter plot à droite est un peu plus large
             subplot_titles=(f"Distribution Sucre ({titre_suffixe})", f"Gras vs Sucre ({titre_suffixe})"),
             horizontal_spacing=0.1
         )
@@ -150,7 +150,8 @@ def sucre_gras(df_final):
         # On boucle sur A, B, C, D, E pour garantir les bonnes couleurs et l'ordre
         for score in order_config["Nutriscore"]:
             d_score = df_plot[df_plot['Nutriscore'] == score]
-            if d_score.empty: continue
+            if d_score.empty:
+                continue
             # 1. GAUCHE : Boxplot du Sucre
             fig.add_trace(
                 go.Box(
