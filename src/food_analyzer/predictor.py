@@ -26,14 +26,13 @@ class NutriModel:
         print("🧠 Injection des connaissances humaines (Smart Features)...")
         df = self.df
         epsilon = 0.0001
-        
+
         # Ratios et Estimations grâce au barème de Santé publique France
         df['Ratio_Sucre_Energie'] = (df['Sucre'] * 4) / (df['Energie'] + epsilon)
         df['Ratio_Gras_Energie'] = (df['Gras'] * 9) / (df['Energie'] + epsilon)
         df['Est_Points_Negatifs'] = (df['Energie']/335) + (df['Saturés']/1) + (df['Sucre']/4.5) + (df['Sel']/0.09)
         df['Est_Points_Positifs'] = (df['Fibres']/0.9) + (df['Protéines']/1.6) + (df['Fruits et Légumes']/20)
-        df['Est_Score_Final'] = df['Est_Points_Negatifs'] - df['Est_Points_Positifs']
-        
+        df['Est_Score_Final'] = df['Est_Points_Negatifs'] - df['Est_Points_Positifs']  
         print("✅ Colonnes calculées ajoutées !")
 
     def prepare_data(self, include_categorical=False):
@@ -48,7 +47,7 @@ class NutriModel:
 
         # Nettoyage
         clean_df = self.df.dropna(subset=features_to_use + [self.target_col]).copy()
-        
+
         # Encodage One-Hot (Catégories)
         if include_categorical and 'Category_Label' in clean_df.columns:
             X = pd.get_dummies(clean_df[features_to_use + ['Category_Label']], columns=['Category_Label'])
@@ -57,7 +56,7 @@ class NutriModel:
 
         y = clean_df[self.target_col]
         self.features_names = X.columns.tolist()
-        
+
         # Split
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
             X, y, test_size=0.2, random_state=42, stratify=y
