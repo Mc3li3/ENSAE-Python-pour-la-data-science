@@ -29,7 +29,11 @@ jobs:
 
     - name: Debug - Check data availability
       run: |
-        ls -R data/ || echo "Data directory missing"
+        echo "📍 Je suis dans : $(pwd)"
+        echo "📂 Contenu de src/food_analyzer :"
+        ls -l src/food_analyzer/
+        echo "📂 Vérification du CSV :"
+        ls -l data/food.csv || echo "❌ LE FICHIER CSV N'EST PAS LÀ !"
 
     - name: Execute Notebook
       run: |
