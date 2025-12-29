@@ -96,14 +96,14 @@ def downloader(saved_dataset):
         for label, api_tag in categories_map.items():
             print(f"\n📦 [{label}] Récupération en cours...")
             products = fetch_products(api_tag, target_count=TARGET_PER_CAT)
-            
+
             # On ajoute le label propre pour l'analyse plus tard
             for p in products:
-                p['Category_Label'] = label 
-                
+                p['Category_Label'] = label
+
             all_data.extend(products)
             print(f"   ✅ {len(products)} récupérés.")
-        
+
         df_raw = pd.json_normalize(all_data)
 
         # 2. Configuration pour voir TOUTES les colonnes (sinon Pandas en cache au milieu)
