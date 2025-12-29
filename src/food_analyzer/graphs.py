@@ -34,7 +34,7 @@ def distribution_nutriments_nutriscore(df_final):
     # On laisse chaque graphique avoir sa propre échelle (g vs kcal vs %)
     fig.update_yaxes(matches=None)
     fig.update_layout(showlegend=False)
-    fig.show()
+    return fig
 
 
 def impact_matrix_sugar(df_final):
@@ -133,7 +133,7 @@ def sucre_gras(df_final):
         else:
             df_plot = df_final[df_final['Category_Label'] == categorie]
             titre_suffixe = categorie
-        
+
         if df_plot.empty:
             print("Aucune donnée.")
             return
@@ -150,9 +150,7 @@ def sucre_gras(df_final):
         # On boucle sur A, B, C, D, E pour garantir les bonnes couleurs et l'ordre
         for score in order_config["Nutriscore"]:
             d_score = df_plot[df_plot['Nutriscore'] == score]
-            
             if d_score.empty: continue
-            
             # 1. GAUCHE : Boxplot du Sucre
             fig.add_trace(
                 go.Box(
