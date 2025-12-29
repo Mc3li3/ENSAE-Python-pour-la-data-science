@@ -93,4 +93,4 @@ Ce projet met en œuvre un pipeline de Data Science complet :
 Aaron HADDAD et Elie ATTALI
 
 
-_P.S. : Désolé pour les émojis « façon ChatGPT », nous pensons vraiment que cela améliore la lisibilité de nos longs textes explicatifs._
+_P.S. : Désolé pour les émojis, nous pensons vraiment que cela améliore la lisibilité de nos longs textes explicatifs._
