@@ -1,4 +1,4 @@
-from .downloader import fetch_products
+from .downloader import downloader
 from .cleaner import clean_data
 from .predictor import NutriModel
 from .graphs import (
