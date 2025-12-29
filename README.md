@@ -7,17 +7,33 @@ Nous vivons une époque paradoxale : nous n'avons jamais eu accès à autant d'i
 Ce projet ne se contente pas d'analyser des données, il cherche à **"cracker" le code du Nutri-Score**.
 
 🎯 **Problématique**
-Notre projet cherche à répondre à une question centrale :
 
-Les données déclaratives d'OpenFoodFacts sont-elles suffisamment fiables et structurées pour nous permettre de redécouvrir, par l'analyse statistique et le Machine Learning, les règles cachées du Nutri-Score ?
+Notre projet s'articule autour d'une question centrale :
 
-Pour y répondre, nous avons découpé notre approche en trois étapes logiques :
+> **Au-delà de la note finale (A, B, C...), quels sont les nutriments qui pèsent réellement le plus lourd dans la balance du Nutri-Score ?**
 
-1. Exploration & Diagnostic (Data Viz) : Avant de vouloir prédire, nous devons comprendre. Les distributions de sucre ou de gras sont-elles cohérentes ? Y a-t-il des anomalies évidentes ou des tendances surprenantes (comme le poids réel du sel ou des fruits) qui contredisent l'intuition ?
+L'algorithme officiel est complexe, mais notre objectif est de vérifier si, à partir des données réelles d'OpenFoodFacts, nous pouvons établir une **hiérarchie claire des facteurs d'influence**.
 
-2. Nettoyage & Préparation (Data Engineering) : Peut-on transformer une base de données collaborative "bruitée" (erreurs de saisie, valeurs manquantes) en un dataset propre, respectant les lois physico-chimiques, apte à entraîner une intelligence artificielle ?
+---
 
-3. Modélisation (Machine Learning) : Un algorithme comme le Random Forest peut-il apprendre tout seul la formule du Nutri-Score ? Avons-nous besoin de l'aider en lui fournissant des indices "métier" (Smart Features) pour qu'il atteigne une performance satisfaisante ?
+### Notre démarche en 3 étapes
+
+Pour y parvenir, nous avons structuré notre analyse de la manière suivante :
+
+#### 1. Exploration & Qualité de la donnée (Data Viz)
+**Avant tout, les données déclaratives sont-elles fiables ?**
+Nous chercherons à observer des corrélations évidentes (ex: Gras vs Nutri-Score) ou à détecter des anomalies de distribution qui pourraient fausser notre analyse.
+
+#### 2. Nettoyage (Data Cleaning)
+**Comment isoler un échantillon représentatif et sain ?**
+L'enjeu est d'éliminer les erreurs de saisie (valeurs aberrantes, incohérences physico-chimiques) pour garantir que le modèle ne soit pas biaisé par du bruit numérique.
+
+#### 3. Modélisation & Interprétabilité (Machine Learning)
+En entraînant un modèle (**Random Forest**), nous ne cherchons pas seulement à prédire la note, mais à **interroger le modèle** pour comprendre sa logique interne :
+
+* Le sucre est-il plus pénalisant que le gras ?
+* Le sel joue-t-il un rôle marginal ou décisif ?
+* L'ajout de connaissances métier (**Smart Features**) change-t-il la perception du modèle sur l'importance des variables ?
 
 > **Approche frugale :**
 > Nous avons fait le choix conscient de travailler sur un échantillon représentatif et méticuleusement nettoyé plutôt que sur le Big Data brut. Nous privilégions la qualité de la méthodologie et la pertinence des variables (*Smart Features*) à la quantité massive de données, réduisant ainsi l'empreinte écologique de nos calculs.
