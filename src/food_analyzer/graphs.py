@@ -16,7 +16,7 @@ def distribution_nutriments_nutriscore(df_final):
         fig = px.box(
             df_final, 
             x="Nutriscore", 
-            y=nutriment_choisi, # <-- C'est ici que ça change dynamiquement
+            y=nutriment_choisi,  # <-- C'est ici que ça change dynamiquement
             color="Nutriscore",
             color_discrete_map=color_map,
             category_orders=order_config,
