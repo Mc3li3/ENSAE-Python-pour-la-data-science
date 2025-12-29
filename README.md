@@ -2,9 +2,9 @@
 
 ## 📋 À propos du projet
 
-Nous vivons une époque paradoxale : nous n'avons jamais eu accès à autant d'informations nutritionnelles, et pourtant, il n'a jamais été aussi difficile de savoir ce que l'on mange vraiment. Le **Nutri-Score** est apparu comme une solution miracle, mais pour un Data Scientist, cela reste souvent une "boîte noire".
+Nous vivons une époque paradoxale : nous n'avons jamais eu accès à autant d'informations nutritionnelles, et pourtant, il n'a jamais été aussi difficile de savoir ce que l'on mange vraiment. Le *Nutri-Score* est apparu comme une solution miracle : une lettre unique, de A à E, pour résumer la complexité biologique d'un aliment.
 
-Ce projet ne se contente pas d'analyser des données, il cherche à **"cracker" le code du Nutri-Score**.
+Mais en tant que Data Scientists, nous nous méfions des "boîtes noires". Accepter aveuglément qu'un produit vaut "D" ou "A" ne nous suffit pas.
 
 🎯 **Problématique**
 
@@ -91,3 +91,6 @@ Ce projet met en œuvre un pipeline de Data Science complet :
 
 ## 👥 Auteurs
 Aaron HADDAD et Elie ATTALI
+
+
+_P.S. : Désolé pour les émojis « façon ChatGPT », nous pensons vraiment que cela améliore la lisibilité de nos longs textes explicatifs._
