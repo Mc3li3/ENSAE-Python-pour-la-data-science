@@ -27,7 +27,7 @@ class NutriModel:
         df = self.df
         epsilon = 0.0001
         
-        # Ratios et Estimations
+        # Ratios et Estimations grâce au barème de Santé publique France
         df['Ratio_Sucre_Energie'] = (df['Sucre'] * 4) / (df['Energie'] + epsilon)
         df['Ratio_Gras_Energie'] = (df['Gras'] * 9) / (df['Energie'] + epsilon)
         df['Est_Points_Negatifs'] = (df['Energie']/335) + (df['Saturés']/1) + (df['Sucre']/4.5) + (df['Sel']/0.09)

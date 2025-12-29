@@ -4,7 +4,6 @@ from plotly.subplots import make_subplots
 from ipywidgets import interact, widgets
 
 
-# Configuration Globale
 color_map = {'A': '#038141', 'B': '#85BB2F', 'C': '#FECB02', 'D': '#EE8100', 'E': '#E63E11'}
 order_config = {"Nutriscore": ["A", "B", "C", "D", "E"]}
 nutriments_clés = ['Energie', 'Sucre', 'Gras', 'Saturés', 'Sel', 'Fibres', 'Protéines', 'Fruits et Légumes']
@@ -12,11 +11,10 @@ nutriments_clés = ['Energie', 'Sucre', 'Gras', 'Saturés', 'Sel', 'Fibres', 'Pr
 
 def distribution_nutriments_nutriscore(df_final):
     def interactive_distribution(nutriment_choisi):
-        # On crée le graphique uniquement pour le nutriment sélectionné
         fig = px.box(
             df_final, 
             x="Nutriscore", 
-            y=nutriment_choisi,  # <-- C'est ici que ça change dynamiquement
+            y=nutriment_choisi,
             color="Nutriscore",
             color_discrete_map=color_map,
             category_orders=order_config,
@@ -24,14 +22,10 @@ def distribution_nutriments_nutriscore(df_final):
             height=500
         )
         fig.update_layout(showlegend=False)
-        fig.show()
-
-    # Création du menu déroulant
-    # On liste les colonnes qu'on veut voir (ex: 'Sucre', 'Gras', 'Energie', etc.)
-    nutriments_dispos = ['Energie', 'Sucre', 'Gras', 'Saturés', 'Sel', 'Fibres', 'Protéines']
+        return fig
 
     print("🔍 Analyse détaillée par nutriment :")
-    interact(interactive_distribution, nutriment_choisi=nutriments_dispos);
+    interact(interactive_distribution, nutriment_choisi=nutriments_clés);
 
 
 def impact_matrix_sugar(df_final):
@@ -58,8 +52,7 @@ def impact_matrix_sugar(df_final):
 
 def corr_matrix(df_final):
     # Sélection des colonnes numériques uniquement
-    cols_numeriques = ['Energie', 'Sucre', 'Gras', 'Saturés', 'Sel', 'Fibres', 'Protéines', 'Fruits et Légumes']
-    corr_matrix = df_final[cols_numeriques].corr().round(2)
+    corr_matrix = df_final[nutriments_clés].corr().round(2)
 
     fig = px.imshow(
         corr_matrix,
@@ -203,4 +196,4 @@ def sucre_gras(df_final):
 
     # --- LANCEMENT DU MENU DÉROULANT ---
     print("👇 Change de catégorie pour mettre à jour instantanément :")
-    interact(visualiser_plotly, categorie=widgets.Dropdown(options=choix_categories, description='Filtre :'));
+    interact(visualiser_plotly, categorie=widgets.Dropdown(options=choix_categories, description='Filtre :'))
