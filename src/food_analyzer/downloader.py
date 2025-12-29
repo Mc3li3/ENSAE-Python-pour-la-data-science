@@ -21,9 +21,8 @@ def fetch_products(category, target_count=500):
             "tag_contains_0": "contains",
             "tag_0": category,
             "page_size": page_size,
-            "page": page,  # C'est ici qu'on tourne les pages
+            "page": page,
             "json": 1,
-            # On demande uniquement les champs utiles
             "fields": "product_name,brands,nutriscore_grade,nutriments,nova_group"
         }
 
