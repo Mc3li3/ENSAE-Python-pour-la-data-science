@@ -63,7 +63,7 @@ Toute la logique (Récupération API → Nettoyage → Visualisation → Machine
 4.  Exécutez les cellules suivantes séquentiellement pour dérouler l'analyse.
 
 
-### ⚙️ Méthodologie : Collaboration et Reproductibilité (CI/CD)
+### ⚙️ Méthodologie : Collaboration et Reproductibilité
 
 Pour garantir la robustesse technique de notre projet, nous avons adopté un flux de travail inspiré des standards de l'industrie. Le développement s'est articulé autour de **Pull Requests**, imposant une relecture (parfois croisée) du code avant fusion dans la branche principale.
 
