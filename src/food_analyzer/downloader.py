@@ -84,7 +84,7 @@ def downloader(saved_dataset):
 
     if IS_CI or saved_dataset:
         print("🤖 Utilisation du dataset ")
-        df_final = pd.read_csv('csv_path')
+        df_final = pd.read_csv(csv_path)
         if IS_CI:
             df_final = df_final.sample(n=100, random_state=42)
     else:
