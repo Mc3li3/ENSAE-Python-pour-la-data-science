@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>💾 La donnée</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="main_files/libs/clipboard/clipboard.min.js"></script>
+<script src="main_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="main_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="main_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="main_files/libs/quarto-html/popper.min.js"></script>
+<script src="main_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="main_files/libs/quarto-html/anchor.min.js"></script>
+<link href="main_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="main_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="main_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="main_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="main_files/libs/bootstrap/bootstrap-d742ed06778eb1a5b2a0b8251afbc0b2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">💾 La donnée</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="e98ce8f6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">-</span>q <span class="op">-</span>r ..<span class="op">/</span>requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Note: you may need to restart the kernel to use updated packages.</code></pre>
+</div>
+</div>
+<section id="de-quoi-avons-nous-besoin" class="level3">
+<h3 class="anchored" data-anchor-id="de-quoi-avons-nous-besoin">De quoi avons-nous besoin ?</h3>
+<p>Pour mener cette enquête, nous devons constituer les “empreintes digitales” physico-chimiques des produits. Nous avons structuré notre dataset ainsi :</p>
+<ul>
+<li>🎯 <strong>La Cible (y) :</strong> Le grade <strong>Nutri-Score</strong> (A, B, C, D, E).</li>
+<li>🧪 <strong>Les Indices (X) :</strong> Les macronutriments bruts (sucre, sel, gras, fibres, protéines, etc.).</li>
+<li>🏷️ <strong>Le Contexte :</strong> La catégorie du produit (on ne juge pas un fromage comme un soda).</li>
+</ul>
+</section>
+<section id="source-et-fiabilité-le-défi-openfoodfacts" class="level3">
+<h3 class="anchored" data-anchor-id="source-et-fiabilité-le-défi-openfoodfacts">Source et Fiabilité : Le défi OpenFoodFacts</h3>
+<p>Nous avons choisi <strong>OpenFoodFacts</strong>, une base de données collaborative. Ce choix méthodologique est à double tranchant :</p>
+<ul>
+<li>✅ <strong>La Force (Réalisme) :</strong> C’est le reflet du marché réel, pas un dataset aseptisé de laboratoire.</li>
+<li>⚠️ <strong>La Faiblesse (Bruit) :</strong> C’est un chaos de données (erreurs de saisie, unités hétérogènes, doublons). La fiabilité brute est faible, rendant le <strong>Data Cleaning</strong> plus critique que la modélisation elle-même.</li>
+</ul>
+</section>
+<section id="une-démarche-frugale-assumée" class="level3">
+<h3 class="anchored" data-anchor-id="une-démarche-frugale-assumée">Une démarche “Frugale” assumée</h3>
+<p>Nous avons délibérément choisi de ne pas travailler sur l’intégralité de la base (Big Data), mais sur un échantillon représentatif.</p>
+<ol type="1">
+<li><strong>Sobriété Numérique :</strong> Entraîner des modèles sur des millions de lignes pour un gain de précision marginal (0.01%) est un non-sens écologique.</li>
+<li><strong>Méthodologie &gt; Volume :</strong> Nous voulons démontrer qu’un échantillon propre et des <em>Smart Features</em> battent toujours un gros volume de données bruité. Cela nous permet de rester agiles et d’itérer rapidement.</li>
+</ol>
+<hr>
+</section>
+<section id="nettoyage-imposer-les-lois-de-la-physique" class="level2">
+<h2 class="anchored" data-anchor-id="nettoyage-imposer-les-lois-de-la-physique">🧹 Nettoyage : Imposer les lois de la physique</h2>
+<p>La première étape n’a pas été technique, mais <strong>physique</strong>. Pour valider nos ordres de grandeur, nous avons codé des règles immuables :</p>
+<ul>
+<li>❌ <strong>La règle des 100% :</strong> Un produit ne peut pas contenir 150g de sucre pour 100g de matière. Nous avons supprimé ou “clampé” ces aberrations.</li>
+<li>🔥 <strong>La cohérence calorique :</strong> Exclusion de tout produit dépassant <strong>900 kcal/100g</strong> (valeur de l’huile pure). Au-delà, c’est une erreur de saisie.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>🚫 Traitement radical des valeurs manquantes (NaN)</strong></p>
+<p>Nous avons <strong>refusé l’imputation par la moyenne</strong>. <em>Remplacer une valeur manquante par la “moyenne du sucre” n’a aucun sens pour classer un produit réglementaire.</em></p>
+<p><strong>Notre choix :</strong> Si l’information manque, le produit est <strong>écarté de l’apprentissage</strong>. C’est une approche stricte, mais nécessaire pour garantir la pureté du modèle.</p>
+</blockquote>
+<p>Enfin, pour la lisibilité, nous avons renommé les colonnes techniques de l’API (ex: <code>energy-kcal_100g</code>) en termes humains (<code>Energie</code>, <code>Sucre</code>), créant ainsi notre propre dictionnaire de variables.</p>
+<div id="dfa984e5" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Charge l'extension d'autorechargement</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext autoreload</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Configure pour tout recharger automatiquement avant chaque exécution</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> food_analyzer <span class="im">import</span> <span class="op">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="stratégie-daquisition-des-données" class="level3">
+<h3 class="anchored" data-anchor-id="stratégie-daquisition-des-données">⚙️ Stratégie d’aquisition des données</h3>
+<p>Pour garantir la fiabilité et la reproductibilité du dataset, nous avons implémenté une logique de collecte défensive :</p>
+<ul>
+<li><p><strong>Gestion intelligente de l’API (Pagination &amp; Rate-Limiting) :</strong> Nous récupérons les données par lots de 50 produits avec des temporisations (<code>sleep</code>) entre les appels.<br>
+<em>Pourquoi ?</em> Cette approche contourne les timeouts serveur, respecte les quotas de l’API OpenFoodFacts et évite le bannissement de notre IP.</p></li>
+<li><p><strong>Détection d’environnement (CI/CD vs Local) :</strong> Le script détecte automatiquement s’il tourne sur GitHub Actions (<code>IS_CI</code>).<br>
+<em>Pourquoi ?</em> Cela permet de charger le dernier dataset statique sauvegardé ou échantillonné dans <code>data/food.csv</code>, rendant le pipeline d’intégration continue <strong>rapide et déterministe</strong>, sans dépendre de la disponibilité de l’API externe.</p></li>
+<li><p><strong>Tolérance aux pannes :</strong> Intégration de mécanismes de “retry” en cas d’erreur HTTP.<br>
+<em>Pourquoi ?</em> Assure que la constitution du dataset ne s’arrête pas à la moindre micro-coupure réseau, garantissant une collecte complète des 500 produits visés par catégorie.</p></li>
+</ul>
+<div id="1b06b5df" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>saved_dataset <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_final <span class="op">=</span> downloader(saved_dataset) <span class="co"># Data cleaning encapsulé au sein même de l'étape de téléchargement des données</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>🌍 Lancement de la collecte
+🤖 Utilisation du dataset 
+--------------------------------------------------
+🚀 DATASET FINAL : 2980 produits.
+--------------------------------------------------
+Répartition par Catégorie :
+Category_Label
+Céréales         482
+Légumineuses     439
+Biscuits         406
+Légumes          400
+Pizzas           393
+Chocolats        336
+Jus de Fruits    310
+Fromages         214
+Name: count, dtype: int64
+
+Répartition par Nutriscore :
+Nutriscore
+A    669
+B    336
+C    829
+D    601
+E    545
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="sélection-des-catégories" class="level3">
+<h3 class="anchored" data-anchor-id="sélection-des-catégories">🥗 Sélection des Catégories</h3>
+<p>Nous avons délibérément ciblé 8 catégories hétérogènes (des <em>Légumes</em> aux <em>Pizzas</em> en passant par les <em>Chocolats</em>) pour maximiser la représentativité du dataset :</p>
+<ul>
+<li><strong>Couverture du spectre nutritionnel :</strong> Cette sélection garantit une distribution variée des <strong>Nutriscores (de A à E)</strong> et des groupes <strong>NOVA</strong>, nous permettant de comparer des produits bruts (sains) à des produits ultra-transformés.</li>
+<li><strong>Variété des attributs :</strong> En mixant boissons, plats préparés, produits secs et frais, nous capturons un large éventail de valeurs nutritionnelles (taux de sucre, gras, protéines), ce qui est indispensable pour éviter les biais d’analyse sur un seul type d’aliment.</li>
+</ul>
+<p>Nous pouvons observé que nous avons obtenu un dataset équilibré où les produits de chaque catégorie sont représentés en grand nombre avec un même ordre de grandeur.</p>
+</section>
+<section id="sélection-des-variables-explicatives" class="level3">
+<h3 class="anchored" data-anchor-id="sélection-des-variables-explicatives">🧪 Sélection des variables explicatives</h3>
+<p>Pour garantir la performance du modèle, nous avons retenu un vecteur de <strong>8 variables quantitatives</strong> et <strong>1 variable catégorielle</strong>, divisées en trois groupes stratégiques reflétant la logique officielle du Nutri-Score.</p>
+<section id="les-composantes-négatives-pénalisantes-pour-le-nutri-score-à-priori" class="level4">
+<h4 class="anchored" data-anchor-id="les-composantes-négatives-pénalisantes-pour-le-nutri-score-à-priori">1. Les composantes négatives (pénalisantes pour le nutri-score à priori)</h4>
+<p>Le Nutri-Score fonctionne par accumulation de “points négatifs” (N). Pour imiter ce comportement, nous avons sélectionné :</p>
+<ul>
+<li><strong><code>nutriments.energy-kcal_100g</code></strong> : La densité énergétique est le premier facteur de pénalité.
+<ul>
+<li>Les variantes en kJ ont été écartées pour éviter la colinéarité parfaite (redondance d’information).</li>
+</ul></li>
+<li><strong><code>nutriments.sugars_100g</code></strong> (Sucres totaux) :
+<ul>
+<li>L’algorithme actuel sanctionne les sucres totaux. Utiliser les sucres ajoutés (<code>added-sugars</code>) aurait induit le modèle en erreur sur les produits naturellement sucrés (ex: jus de fruits).</li>
+</ul></li>
+<li><strong><code>nutriments.saturated-fat_100g</code></strong> (Acides gras saturés) :
+<ul>
+<li>Nous avons délibérément choisi les graisses saturées et non les graisses totales (<code>fat_100g</code>). Un produit peut être gras mais sain (ex: Huile de noix).</li>
+</ul></li>
+<li><strong><code>nutriments.sodium_100g</code></strong></li>
+</ul>
+</section>
+<section id="les-composantes-positives-valorisantes-pour-le-nutri-score-à-priori" class="level4">
+<h4 class="anchored" data-anchor-id="les-composantes-positives-valorisantes-pour-le-nutri-score-à-priori">2. Les composantes Positives (valorisantes pour le nutri-score à priori)</h4>
+<p>Le score est atténué par des “points positifs” (P). Sans ces variables, le modèle ne peut pas expliquer pourquoi une pizza classée B est meilleure qu’une autre classée D.</p>
+<ul>
+<li><strong><code>nutriments.fiber_100g</code></strong> (Fibres)</li>
+<li><strong><code>nutriments.proteins_100g</code></strong> (Protéines)</li>
+<li><strong><code>nutriments.fruits-vegetables-nuts-estimate-from-ingredients_100g</code></strong> :
+<ul>
+<li>Variable souvent latente (estimée). Sans elle, le modèle échoue systématiquement à prédire correctement les classes A et B des produits transformés mixtes (plats préparés).</li>
+</ul></li>
+</ul>
+</section>
+<section id="la-variable-de-contextualisation" class="level4">
+<h4 class="anchored" data-anchor-id="la-variable-de-contextualisation">3. La variable de contextualisation</h4>
+<ul>
+<li><strong><code>Category_Label</code></strong> (Catégorie du produit) :
+<ul>
+<li>Le calcul du Nutri-Score n’est pas universel (grilles distinctes pour les “Matières grasses”, “Boissons” et “Fromages”).</li>
+<li><em>Impact ML :</em> Cette variable permet aux algorithmes non-linéaires (comme le Random Forest) de créer des embranchements conditionnels (ex: <em>“Si Fromage, alors tolérer plus de gras”</em>).</li>
+</ul></li>
+</ul>
+</section>
+<section id="justification-des-variables-rejetées" class="level4">
+<h4 class="anchored" data-anchor-id="justification-des-variables-rejetées">🚫 Justification des variables rejetées</h4>
+<p>L’exclusion de variables est cruciale pour réduire le bruit et garantir la robustesse du modèle.</p>
+<section id="a.-élimination-du-bruit-micronutriments" class="level5">
+<h5 class="anchored" data-anchor-id="a.-élimination-du-bruit-micronutriments">A. Élimination du Bruit (Micronutriments)</h5>
+<p>Nous avons exclu : <code>vitamin-c</code>, <code>calcium</code>, <code>iron</code>, <code>magnesium</code>, etc. &gt; Bien que vitaux, ces micronutriments n’entrent pas dans la formule du Nutri-Score. Les inclure créerait des corrélations fallacieuses (ex: le modèle associerait “Vitamine C” à “Bon score” uniquement parce que les fruits en contiennent, faussant l’analyse causale).</p>
+</section>
+<section id="b.-standardisation-des-unités-biais-déchelle" class="level5">
+<h5 class="anchored" data-anchor-id="b.-standardisation-des-unités-biais-déchelle">B. Standardisation des Unités (Biais d’échelle)</h5>
+<p>Nous avons exclu toutes les colonnes <code>_serving</code> (par portion) et <code>_unit</code>. &gt; Pour que le Machine Learning soit viable, les données doivent être comparables. Comparer 100g de biscuits à une portion de 30g introduirait un biais mathématique majeur. Nous travaillons exclusivement sur la base normalisée <strong>Standard 100g</strong>.</p>
+</section>
+<section id="c.-prévention-de-la-fuite-de-données-data-leakage" class="level5">
+<h5 class="anchored" data-anchor-id="c.-prévention-de-la-fuite-de-données-data-leakage">C. Prévention de la Fuite de Données (Data Leakage)</h5>
+<p>Nous avons exclu : <code>nutriscore_score</code> (le score numérique brut). &gt; C’est la réponse à l’équation (Target). Donner le score numérique au modèle pour prédire la classe (A-E) donnerait une précision artificielle de 100%, mais le modèle n’aurait rien appris sur la composition nutritionnelle réelle.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="exploration-les-surprises-du-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="exploration-les-surprises-du-dataset">4. Exploration : Les surprises du dataset</h2>
+<p>On peut observer la distribution des produits par nutriscore avec leurs teneurs pour chaque nutriment. On voit que le sucre, le gras, la graisse saturée ont l’air d’avoir comme on pouvait l’imaginer, un impact négatif sur le Nutri-score.</p>
+<p>Nous vous invitons à consulter le graphe suivant pour Fruits et Légumes pour ainsi découvrir que cette variable à l’air d’être assez déterminante statistiquement pour obtenir un Nutri-score positif A B ou C.</p>
+<div id="61b5648f" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>distribution_nutriments_nutriscore(df_final)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>🔍 Analyse détaillée par nutriment :</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"93bcaafc36ad408d92db10e9c183141c","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+</div>
+<p><strong>L’exemple du sucre</strong></p>
+<p><strong>Le schéma suivant montre bien que</strong> la relation entre le taux de sucre et le Nutriscore n’est pas strictement binaire.</p>
+<p>En observant la distribution, on constate que si une teneur en sucre &gt; 20g (zone rouge) est <em>majoritairement</em> corrélée à un Nutriscore défavorable D ou E, cette règle n’est pas absolue. Des points aberrants (outliers) apparaissent dans des scores plus favorables C, probablement sauvés par leur teneur en Fruit et Légumes.</p>
+<p>C’est cette “zone grise” qui nous donne envie d’utiliser un modèle de machine learning particulier, un <strong>Random Forest</strong>. Il est capable de segmenter ces cas limites en appliquant des règles conditionnelles successives pour déterminer comment le Nutriscore arbitre ces compensations nutritionnelles.</p>
+<div id="44e72aa6" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>impact_matrix_sugar(df_final).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<p>La Heatmap ci-dessous nous permet de valider la cohérence nutritionnelle du dataset et d’anticiper les comportements du modèle :</p>
+<ul>
+<li><strong>Forte multicollinéarité (redondance) :</strong> On observe une corrélation très élevée (<strong>0.86</strong>) entre <em>Gras</em> et <em>Saturés</em>, ainsi qu’entre <em>Energie</em> et <em>Gras</em> (<strong>0.83</strong>). Cela est logique (le gras est le macronutriment le plus calorique), mais cela indique que ces variables apportent une information très similaire.</li>
+<li><strong>L’indépendance du sel :</strong> Le <em>Sel</em> est une variable quasi-orthogonale (corrélations proches de 0 partout). C’est une excellente nouvelle : cela signifie qu’il apporte une information unique et complémentaire pour la prédiction.</li>
+<li><strong>Opposition structurelle :</strong> La corrélation négative entre <em>Fruits/Légumes</em> et <em>Energie</em> (<strong>-0.61</strong>) confirme que les aliments sains sont structurellement moins denses en calories.</li>
+</ul>
+<div id="485e9a73" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>corr_matrix(df_final).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<p>La répartition des scores par famille d’aliments confirme la nécessité d’inclure la catégorie comme variable explicative :</p>
+<ul>
+<li><strong>Polarisation des Catégories :</strong> Certaines familles sont des prédicteurs forts à elles seules.
+<ul>
+<li>Les <em>Légumineuses</em> et <em>Légumes</em> sont massivement classés <strong>A ou B</strong> (Vert).</li>
+<li>Les <em>Chocolats</em> et <em>Biscuits</em> saturent les classes <strong>D et E</strong> (Rouge/Orange).</li>
+</ul></li>
+<li><strong>La Zone Grise (Variance Intra-classe) :</strong> C’est ici que le Machine Learning devient indispensable.
+<ul>
+<li>Regardez les <strong>Céréales</strong> : elles couvrent tout le spectre, du A au E.</li>
+<li>Les <strong>Pizzas</strong> et <strong>Jus de Fruits</strong> oscillent principalement entre C et D, mais avec des exceptions notables.</li>
+<li><em>Conclusion :</em> La catégorie seule ne suffit pas à prédire le score. Le modèle devra analyser la composition fine (fibres, sucres) pour classer correctement ces produits “mixtes”.</li>
+</ul></li>
+</ul>
+<div id="4f0562ff" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>distribution_nutriscore_par_famille_d_aliments(df_final).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<p>Ce graphique en barres empilées montre la répartition des scores pour les marques les plus fréquentes. * <strong>Marques Spécialistes vs Généralistes :</strong> * Les marques de confiserie (Milka, Lindt, Cadbury) sont quasi-exclusivement rouges/oranges. * Les marques distributeurs (Carrefour, Marque Repère, Sainsbury’s) présentent un profil très varié, reflétant leur catalogue diversifié. * <strong>Risque de Biais (Data Leakage) :</strong> * Si nous utilisions la variable “Marque” pour l’entraînement, le modèle pourrait apprendre paresseusement : <em>“Si Milka, alors E”</em>. * <em>Décision :</em> Nous avons exclu la marque des variables explicatives. Le but est que le modèle juge un produit sur sa <strong>composition nutritionnelle</strong> (le taux de sucre), et non sur son étiquette commerciale. Cela garantit que le modèle pourra noter correctement une nouvelle marque inconnue à l’avenir.</p>
+<div id="2047b874" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nutriscore_par_marques(df_final).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<p><strong>1. Distribution du Sucre par Score (Boxplot) :</strong> * <strong>Chevauchement des Classes :</strong> On remarque que le Nutri-Score <strong>D</strong> possède une étendue très vaste (jusqu’à 59.7g de sucre), dépassant largement les médianes des classes supérieures. * <strong>La “Bascule” du Score E :</strong> La boîte à moustaches du score <strong>E</strong> commence là où les autres s’arrêtent (médiane à 35g), confirmant que le sucre est un “accélérateur” de mauvaise note, mais qu’il n’est pas le seul critère de discrimination pour les scores intermédiaires.</p>
+<p><strong>2. Cartographie Gras vs Sucre (Scatter Plot) :</strong> * <strong>Zones de Densité :</strong> Le nuage de points montre une saturation de produits <strong>D (Orange)</strong> et <strong>E (Rouge)</strong> dans les zones à haute teneur en gras (&gt;30g) ou en sucre (&gt;40g). * <strong>L’Exceptions des “Bons” Scores :</strong> Les produits <strong>A et B</strong> (en vert) sont quasi-exclusivement confinés dans le coin inférieur gauche (faible en gras ET faible en sucre). * <strong>Non-Linéarité :</strong> De nombreux produits avec un taux de gras moyen (20-30g) se retrouvent éparpillés entre les scores B, C et D. Cela prouve que des variables “correctrices” (fibres, protéines, pourcentage de fruits) jouent un rôle de balance, empêchant une classification par simple régression.</p>
+<div id="5427fd9a" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sucre_gras(df_final)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>👇 Change de catégorie pour mettre à jour instantanément :</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"928fb1cff50c41f496eecc37df5f2f40","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+</div>
+<section id="conclusion-de-lanalyse-exploratoire-des-données" class="level4">
+<h4 class="anchored" data-anchor-id="conclusion-de-lanalyse-exploratoire-des-données">💡 Conclusion de l’analyse exploratoire des données</h4>
+<p>L’ensemble de ces visualisations confirme trois points clés pour la suite de notre projet :</p>
+<ol type="1">
+<li><strong>Le Nutriscore est multi-factoriel :</strong> Aucune variable seule (sucre, gras ou calories) ne permet de prédire le score avec certitude. C’est l’interaction entre les bonus (fibres, protéines, fruits) et les malus qui crée la note finale.</li>
+<li><strong>La Catégorie est un pivot :</strong> Un même taux de sucre n’aura pas le même impact sur une céréale que sur un fromage. L’inclusion du <code>Category_Label</code> dans notre modèle sera déterminante.</li>
+<li><strong>Le choix du Random Forest est validé :</strong> Face à la forte colinéarité des nutriments et aux seuils de bascule visibles sur les boxplots (ex: le sucre chez les chocolats), un algorithme capable de créer des règles de décision non-linéaires est l’outil idéal.</li>
+</ol>
+</section>
+</section>
+<section id="modélisation-expliquer-plutôt-que-prédire" class="level2">
+<h2 class="anchored" data-anchor-id="modélisation-expliquer-plutôt-que-prédire">5. 🌲 Modélisation : Expliquer plutôt que prédire</h2>
+<section id="notre-approche-classification-supervisée" class="level3">
+<h3 class="anchored" data-anchor-id="notre-approche-classification-supervisée">Notre approche : Classification supervisée</h3>
+<p>Le problème est traité comme une classification multiclasse (A, B, C, D, E). L’objectif est de rétro-ingénierier la logique mathématique de la notation.</p>
+</section>
+<section id="le-choix-de-larme-random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="le-choix-de-larme-random-forest">Le choix de l’arme : Random Forest</h3>
+<p>Nous avons privilégié la <strong>Forêt Aléatoire</strong> pour trois raisons : 1. <strong>Logique par seuils :</strong> Les arbres de décision imitent parfaitement la structure de règles “Si… Alors…” de l’algorithme officiel. 2. <strong>Résistance à la multicollinéarité :</strong> Le Random Forest gère naturellement les variables corrélées (ex: Énergie vs Gras) identifiées lors de l’EDA. 3. <strong>Interprétabilité :</strong> Grâce au <code>feature_importance</code>, nous pouvons quantifier l’impact réel de chaque nutriment sur la note finale.</p>
+<blockquote class="blockquote">
+<p><strong>Note sur l’interprétation :</strong> Une attention particulière est portée à la lecture de l’importance des variables, car l’impact des variables colinéaires peut être réparti arbitrairement entre elles.</p>
+</blockquote>
+<div id="1c075f58" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> food_analyzer.predictor <span class="im">import</span> NutriModel</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialisation</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>predictor <span class="op">=</span> NutriModel(df_final)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>scores_history <span class="op">=</span> {} </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1️⃣ TRAIN / </span><span class="al">TEST</span><span class="co"> NORMAL (La Baseline)</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">🟦 --- ÉTAPE 1 : BASELINE SIMPLE ---"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>predictor.prepare_data(include_categorical<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>predictor.train()</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>scores_history[<span class="st">'1. Baseline'</span>] <span class="op">=</span> predictor.evaluate(method<span class="op">=</span><span class="st">"cross_val"</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 📊 VUE 1 : Comment réfléchit le modèle "naïf" ?</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>predictor.plot_feature_importance(top_n<span class="op">=</span><span class="dv">15</span>, custom_title<span class="op">=</span><span class="st">"1. Importance des Features (Modèle Naïf)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+🟦 --- ÉTAPE 1 : BASELINE SIMPLE ---
+👶 Mode BASIC : Utilisation des nutriments bruts.
+✅ Dataset prêt : 16 variables en entrée.
+📊 CV Score : 86.78% (+/- 1.02%)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-11-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>L’analyse de l’importance des variables pour le <strong>Modèle Naïf</strong> révèle une hiérarchie claire dans la prédiction du Nutriscore :</p>
+<section id="variables-déterminantes-impact-majeur" class="level4">
+<h4 class="anchored" data-anchor-id="variables-déterminantes-impact-majeur">1. Variables déterminantes (Impact Majeur)</h4>
+<ul>
+<li><strong>Sucre (~20%)</strong> : Le prédicteur dominant. Une variation du taux de sucre est le facteur le plus susceptible de modifier la classe prédite.</li>
+<li><strong>Effet Combiné (Gras / Énergie / Saturés)</strong> : Ces trois variables agissent de concert. Bien que l’<strong>Énergie (~11%)</strong> et les <strong>Acides Gras Saturés (~13%)</strong> soient isolés dans le graphique, ils sont intrinsèquement liés aux <strong>Gras (~8%)</strong>, formant un bloc de pénalité cohérent.</li>
+<li><strong>Sel (~13%)</strong> : Complète le trio des variables “critiques” avec un impact direct et élevé.</li>
+</ul>
+</section>
+<section id="variables-à-impact-moyen" class="level4">
+<h4 class="anchored" data-anchor-id="variables-à-impact-moyen">2. Variables à impact moyen</h4>
+<ul>
+<li><strong>Protéines &amp; Fibres </strong> : Impact modéré, agissant comme contrepoids positif (bonus) dans l’algorithme de calcul pour améliorer le score final.</li>
+<li><strong>Fruits &amp; Légumes</strong> : Moindre influence sur les décisions du modèle, possiblement due à une plus faible variabilité dans le jeu de données.</li>
+</ul>
+</section>
+<section id="variables-un-peu-plus-faible" class="level4">
+<h4 class="anchored" data-anchor-id="variables-un-peu-plus-faible">3. Variables un peu plus faible</h4>
+<p>L’observation du graphique montre que les variables issues du <strong>One-Hot Encoding</strong> (les labels de catégories de produits) affichent systématiquement un impact plus faible que les variables numériques :</p>
+<ul>
+<li><strong>Dilution de l’Information</strong> : En transformant une colonne “Catégorie” en plusieurs colonnes binaires (0 ou 1), l’importance statistique est fragmentée. Chaque catégorie individuelle pèse moins lourd que les variables continues comme le Sucre ou l’Énergie.</li>
+<li><strong>Universalité des nutriments</strong> : Le faible impact des variables catégorielles suggère que le modèle privilégie les <strong>valeurs nutritionnelles intrinsèques</strong> plutôt que l’appartenance à une catégorie spécifique. En clair, le modèle “comprend” qu’un produit est mal classé à cause de son taux de sucre, peu importe qu’il s’agisse d’un soda ou d’un biscuit.</li>
+<li><strong>Biais de variabilité</strong> : La plupart des catégories encodées sont très spécifiques et ne concernent qu’une petite portion du dataset, ce qui limite leur pouvoir prédictif global par rapport aux nutriments présents dans 100% des produits.</li>
+</ul>
+</section>
+</section>
+<section id="analyse-de-la-performance-validation-croisée" class="level3">
+<h3 class="anchored" data-anchor-id="analyse-de-la-performance-validation-croisée">📈 Analyse de la Performance (Validation Croisée)</h3>
+<p>Le modèle affiche un score de <strong>86.78%</strong> avec un écart-type de <strong>+/- 1.02%</strong>.</p>
+<ul>
+<li><strong>Performance Elevée</strong> : Un score de ~87% indique que le modèle possède une excellente capacité prédictive pour classer correctement les produits selon leur Nutriscore.</li>
+<li><strong>Grande Stabilité</strong> : L’écart-type très faible (1.02%) prouve que les performances sont consistantes. Le modèle ne dépend pas d’un échantillon de données spécifique et ne présente pas de signe de surapprentissage (overfitting) marqué.</li>
+<li><strong>Fiabilité</strong> : Cette robustesse statistique confirme que les conclusions tirées sur l’importance des features (Sucre, Énergie, Saturés) s’appuient sur un modèle fiable et généralisable.</li>
+</ul>
+</section>
+<section id="loptimisation-des-hyperparamètres-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="loptimisation-des-hyperparamètres-tuning">⚙️ L’Optimisation des Hyperparamètres (Tuning)</h3>
+<p>L’<strong>Hyperparameter Tuning</strong> consiste à régler manuellement les curseurs d’un modèle pour maximiser ses performances.</p>
+<ul>
+<li><strong>Paramètres vs Hyperparamètres</strong> : Les paramètres sont appris par le modèle (poids), tandis que les hyperparamètres sont configurés <strong>avant</strong> l’entraînement (ex: profondeur d’un arbre).</li>
+<li><strong>Objectif</strong> : Trouver le réglage optimal pour éviter le sur-apprentissage (trop complexe) ou le sous-apprentissage (trop simple).</li>
+<li><strong>Méthodes</strong> : On utilise généralement un <strong>Grid Search</strong> (test de toutes les combinaisons) ou un <strong>Random Search</strong> (test aléatoire) pour identifier la meilleure configuration.</li>
+</ul>
+<p><strong>En résumé</strong> : C’est le passage du réglage “par défaut” au réglage “sur mesure” pour gagner en précision et en stabilité.</p>
+<p>Nous testons un GridSearch dans la prochaine cellule.</p>
+<div id="231640f8" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 HYPERPARAMÈTRES (Optimisation du modèle de base)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">🟨 --- ÉTAPE 2 : TUNING DU MODÈLE BASELINE ---"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>predictor.optimize_hyperparameters()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>scores_history[<span class="st">'2. Baseline Tuned'</span>] <span class="op">=</span> predictor.evaluate(method<span class="op">=</span><span class="st">"cross_val"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 📊 VUE 2 : Est-ce que le tuning change la logique ?</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>predictor.plot_feature_importance(top_n<span class="op">=</span><span class="dv">15</span>, custom_title<span class="op">=</span><span class="st">"2. Importance après Tuning (Sans Smart Features)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+🟨 --- ÉTAPE 2 : TUNING DU MODÈLE BASELINE ---
+🔧 Optimisation en cours (Patience...)...
+Fitting 3 folds for each of 24 candidates, totalling 72 fits
+🎉 Meilleurs params : {'max_depth': 15, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+📊 CV Score : 86.34% (+/- 0.96%)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-12-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Le tuning ne change pas vraiment le résultat précédent, c’est pourquoi on a eu l’idée de créer de nouvelles features pour essayer d’avoir une meilleure prédictibilité.</p>
+</section>
+<section id="le-feature-engineering-lintelligence-métier" class="level3">
+<h3 class="anchored" data-anchor-id="le-feature-engineering-lintelligence-métier">🛠️ Le Feature Engineering : L’Intelligence Métier</h3>
+<p>C’est ici que notre projet se distingue. Pour dépasser le plafond de performance de nos modèles (~86%), nous avons enrichi le jeu de données en injectant des connaissances métier (Santé Publique France sur le calcul du nutriscore) directement dans l’apprentissage, pour voir si cela améliorait nos performances (BONUS).</p>
+<section id="nos-smart-features" class="level4">
+<h4 class="anchored" data-anchor-id="nos-smart-features">🧠 Nos “Smart Features”</h4>
+<ul>
+<li><strong>Contextualisation (Ratios)</strong> :
+<ul>
+<li><em>Variables :</em> <code>Ratio_Sucre_Energie</code> et <code>Ratio_Gras_Energie</code>.<br>
+</li>
+<li><em>Objectif :</em> Permettre au modèle de comprendre la <strong>densité nutritionnelle</strong>. 10g de sucre n’ont pas le même impact dans un biscuit hypercalorique que dans une boisson où ils représentent 100% de l’apport énergétique.</li>
+</ul></li>
+<li><strong>Simulation des composantes</strong> :
+<ul>
+<li><em>Variables :</em> <code>Est_Points_Negatifs</code> (somme pondérée Énergie, Saturés, Sucre, Sel) et <code>Est_Points_Positifs</code> (Fibres, Protéines, Fruits).<br>
+</li>
+<li><em>Objectif :</em> Projeter les nutriments bruts sur une échelle linéaire directement comparable à celle du Nutriscore officiel.</li>
+</ul></li>
+<li><strong>Score final estimé</strong> :
+<ul>
+<li><em>Variable :</em> <code>Est_Score_Final</code> <strong>$ = Points_Négatifs - Points_Positifs$</strong>.<br>
+</li>
+<li><em>Objectif :</em> Agir comme un <strong>“indice fort”</strong>. Le modèle ne perd plus d’énergie à réapprendre l’arithmétique de base et peut se concentrer sur la classification fine des <strong>cas limites</strong> (ex: produits frontières entre C et D).</li>
+</ul></li>
+</ul>
+<section id="sources-et-références" class="level5">
+<h5 class="anchored" data-anchor-id="sources-et-références">📚 Sources et Références</h5>
+<p>Les coefficients de simulation et les constantes de densité énergétique utilisés dans ce projet s’appuient sur les référentiels suivants :</p>
+<p>Basé sur le <em>QUESTIONS- REPONSES SUR LE NUTRI-SCORE</em>. Les diviseurs (ex: 335 pour l’énergie, 4.5 pour le sucre) correspondent aux seuils d’attribution des points de pénalité et de bonus.</p>
+<p>https://nutrition.coeur-herault.fr/sites/default/files/files/fichiers/qr_scientifique_technique_nutriscore-120320.pdf</p>
+<p>Ces coefficients simulent la logique de base du Nutri-Score (algorithme 2017) et l’algorithme 2024 a affiné certains de ces seuils pour être plus exigeant.</p>
+</section>
+<section id="impact-sur-le-modèle" class="level5">
+<h5 class="anchored" data-anchor-id="impact-sur-le-modèle">🚀 Impact sur le Modèle</h5>
+<blockquote class="blockquote">
+<p><strong>Le modèle ne cherche plus seulement des corrélations : il apprend à affiner une formule qu’on lui a partiellement “mâchée”.</strong> &gt;</p>
+</blockquote>
+<div id="cb4816ac" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 FEATURE ENGINEERING (Le Game Changer)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">🟩 --- ÉTAPE 3 : AJOUT DES SMART FEATURES ---"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. On injecte les calculs</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>predictor.add_smart_features()</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. On RE-PRÉPARE les données</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>predictor.prepare_data(include_categorical<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. On RE-ENTRAÎNE</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>predictor.train() </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>scores_history[<span class="st">'3. Smart Features'</span>] <span class="op">=</span> predictor.evaluate(method<span class="op">=</span><span class="st">"cross_val"</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 📊 VUE 3 : Le modèle a-t-il compris la formule ? (Regarde 'Est_Score_Final')</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>predictor.plot_feature_importance(top_n<span class="op">=</span><span class="dv">15</span>, custom_title<span class="op">=</span><span class="st">"3. Importance avec Smart Features"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+🟩 --- ÉTAPE 3 : AJOUT DES SMART FEATURES ---
+🧠 Injection des connaissances humaines (Smart Features)...
+✅ Colonnes calculées ajoutées !
+😎 Mode EXPERT : 5 smart features détectées.
+✅ Dataset prêt : 21 variables en entrée.
+📊 CV Score : 88.09% (+/- 1.05%)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-13-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="a607ce26" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 4️⃣ HYPERPARAMÈTRES FINAL (Optimisation du modèle Smart)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">🟧 --- ÉTAPE 4 : TUNING FINAL (SMART) ---"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>predictor.optimize_hyperparameters()</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>scores_history[<span class="st">'4. Smart Tuned'</span>] <span class="op">=</span> predictor.evaluate(method<span class="op">=</span><span class="st">"cross_val"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 📊 VUE 4 : Le modèle ultime</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>predictor.plot_feature_importance(top_n<span class="op">=</span><span class="dv">15</span>, custom_title<span class="op">=</span><span class="st">"4. Modèle Final Optimisé"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+🟧 --- ÉTAPE 4 : TUNING FINAL (SMART) ---
+🔧 Optimisation en cours (Patience...)...
+Fitting 3 folds for each of 24 candidates, totalling 72 fits
+🎉 Meilleurs params : {'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+📊 CV Score : 88.09% (+/- 1.05%)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-14-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Le résultat est sans appel :</strong> En nourrissant le modèle avec ces variables “métier”, nous sommes passés d’une précision “plafond” à une meilleure compréhension de la logique avec un score bien supérieur.</p>
+<div id="f7ea6573" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 🏆 BILAN FINAL</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> plt.bar(scores_history.keys(), [s<span class="op">*</span><span class="dv">100</span> <span class="cf">for</span> s <span class="kw">in</span> scores_history.values()], </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>               color<span class="op">=</span>[<span class="st">'blue'</span>, <span class="st">'orange'</span>, <span class="st">'green'</span>, <span class="st">'red'</span>])</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Précision (%)'</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Progression de la performance'</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">75</span>, <span class="dv">100</span>) </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar <span class="kw">in</span> bars:</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> bar.get_height()</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    plt.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="dv">2</span>, height <span class="op">+</span> <span class="fl">0.5</span>, </span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>             <span class="ss">f"</span><span class="sc">{</span>height<span class="sc">:.2f}</span><span class="ss">%"</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="conclusion-générale-du-projet" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-générale-du-projet">🏁 Conclusion générale du projet</h2>
+<section id="analyse-de-la-progression-des-performances" class="level3">
+<h3 class="anchored" data-anchor-id="analyse-de-la-progression-des-performances">📈 Analyse de la Progression des Performances</h3>
+<p>L’évolution de la précision du modèle démontre l’efficacité de notre approche méthodologique :</p>
+<ul>
+<li><strong>Baseline (86.78%)</strong> : Le modèle initial présente déjà une excellente performance, confirmant que les données brutes contiennent l’essentiel du signal nécessaire.</li>
+<li><strong>Hyperparameter Tuning (86.34%)</strong> : Le léger recul montre que les réglages par défaut étaient déjà optimaux pour ce dataset, que le modèle a préféré généraliser, ou que cette étape eut été un peu décevante.</li>
+<li><strong>Apport du Feature Engineering (88.09%)</strong> : L’introduction des <strong>“Smart Features”</strong> (ratios et estimation du score) a permis de briser le plafond de verre des 87%. L’injection de logique métier est ici plus puissante que la simple optimisation algorithmique.</li>
+<li><strong>Stabilité Finale</strong> : Le score final de <strong>88.09%</strong> avec un écart-type faible (+/- 1.02%) garantit un modèle robuste et fiable.</li>
+</ul>
+</section>
+<section id="synthèse-de-lintelligence-du-modèle" class="level3">
+<h3 class="anchored" data-anchor-id="synthèse-de-lintelligence-du-modèle">🧠 Synthèse de l’Intelligence du Modèle</h3>
+<p>L’analyse de l’importance des variables confirme que le modèle a parfaitement intégré la hiérarchie nutritionnelle : 1. <strong>Le Sucre</strong> domine largement les prédictions (~20%), suivi des <strong>Graisses Saturées</strong> et du <strong>Sel</strong>. 2. Le modèle privilégie les <strong>nutriments universels</strong> plutôt que les catégories de produits, assurant une classification basée sur la réalité biologique plutôt que sur le marketing.</p>
+<p><strong>En conclusion, ce projet démontre que l’alliance entre le Machine Learning et l’expertise en nutrition (via le Feature Engineering) permet d’atteindre une précision de près de 90%, offrant un outil d’aide à la décision performant pour l’industrie agroalimentaire et les consommateurs.</strong></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
